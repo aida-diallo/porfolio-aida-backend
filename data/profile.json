@@ -1,0 +1,24 @@
+{
+  "name": "Aida Diallo",
+  "title": "Développeuse Full Stack",
+  "greeting": "Bonjour, je suis",
+  "description": "Passionnée par la création d'expériences numériques élégantes et performantes. Je transforme les idées en solutions web modernes.",
+  "about": [
+    "Je suis une développeuse passionnée par la technologie et l'innovation. Mon parcours m'a permis de développer une expertise solide dans la conception et le développement d'applications web modernes.",
+    "J'aime relever des défis techniques et créer des solutions élégantes qui allient performance et esthétique. Chaque projet est pour moi une opportunité d'apprendre et de repousser mes limites.",
+    "Mon approche se concentre sur la qualité du code, l'expérience utilisateur et les bonnes pratiques de développement."
+  ],
+  "location": "Sénégal",
+  "specialty": "Développement Full Stack",
+  "availability": "Ouverte aux opportunités",
+  "email": "votre.email@example.com",
+  "github": "https://github.com/aida-diallo",
+  "linkedin": "",
+  "twitter": "",
+  "stats": {
+    "years": "2+",
+    "projects": "10+",
+    "technologies": "5+",
+    "engagement": "100%"
+  }
+}

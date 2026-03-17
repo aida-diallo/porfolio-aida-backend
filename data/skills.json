@@ -1,0 +1,35 @@
+[
+  {
+    "category": "Front-End",
+    "icon": "code",
+    "skills": [
+      { "name": "React.js", "level": 4 },
+      { "name": "JavaScript / ES6+", "level": 5 },
+      { "name": "HTML5 / CSS3", "level": 5 },
+      { "name": "TypeScript", "level": 3 },
+      { "name": "Tailwind CSS", "level": 4 }
+    ]
+  },
+  {
+    "category": "Back-End",
+    "icon": "server",
+    "skills": [
+      { "name": "Node.js", "level": 4 },
+      { "name": "Python", "level": 4 },
+      { "name": "Express.js", "level": 4 },
+      { "name": "MongoDB", "level": 3 },
+      { "name": "PostgreSQL", "level": 3 }
+    ]
+  },
+  {
+    "category": "Outils & Autres",
+    "icon": "tool",
+    "skills": [
+      { "name": "Git / GitHub", "level": 5 },
+      { "name": "Figma", "level": 3 },
+      { "name": "Docker", "level": 2 },
+      { "name": "Linux", "level": 3 },
+      { "name": "Méthode Agile", "level": 4 }
+    ]
+  }
+]

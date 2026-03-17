@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "E-Commerce Platform",
+    "description": "Plateforme e-commerce complète avec système de paiement intégré, gestion de panier et tableau de bord administrateur.",
+    "tech": ["React", "Node.js", "MongoDB", "Stripe"],
+    "github": "https://github.com/aida-diallo",
+    "live": "https://example.com",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "name": "Application de Gestion",
+    "description": "Application de gestion de tâches et de projets avec authentification, collaboration en temps réel et notifications.",
+    "tech": ["React", "Firebase", "Material UI", "WebSocket"],
+    "github": "https://github.com/aida-diallo",
+    "live": "https://example.com",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "name": "Portfolio Créatif",
+    "description": "Portfolio personnel avec design moderne, animations fluides et une expérience utilisateur immersive.",
+    "tech": ["React", "Framer Motion", "CSS3", "Express"],
+    "github": "https://github.com/aida-diallo",
+    "live": "https://example.com",
+    "featured": false
+  },
+  {
+    "id": 4,
+    "name": "API RESTful",
+    "description": "API backend complète avec authentification JWT, gestion des rôles et documentation Swagger intégrée.",
+    "tech": ["Node.js", "Express", "PostgreSQL", "JWT"],
+    "github": "https://github.com/aida-diallo",
+    "live": "https://example.com",
+    "featured": false
+  }
+]

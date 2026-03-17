@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "period": "2024 — Présent",
+    "role": "Développeuse Full Stack",
+    "company": "Projet Personnel / Freelance",
+    "description": "Conception et développement d'applications web complètes. Mise en place d'architectures modernes et de solutions performantes pour divers clients.",
+    "tags": ["React", "Node.js", "MongoDB", "REST API"]
+  },
+  {
+    "id": 2,
+    "period": "2023 — 2024",
+    "role": "Développeuse Front-End",
+    "company": "Stage / Projet Académique",
+    "description": "Développement d'interfaces utilisateur réactives et modernes. Collaboration avec les équipes design pour créer des expériences utilisateur optimales.",
+    "tags": ["JavaScript", "React", "CSS3", "Figma"]
+  },
+  {
+    "id": 3,
+    "period": "2022 — 2023",
+    "role": "Formation en Développement Web",
+    "company": "Parcours Académique",
+    "description": "Apprentissage approfondi des fondamentaux du développement web, des bases de données et des méthodologies de développement agile.",
+    "tags": ["HTML/CSS", "JavaScript", "Python", "SQL"]
+  }
+]

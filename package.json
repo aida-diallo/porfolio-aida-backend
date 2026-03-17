@@ -1,0 +1,23 @@
+{
+  "name": "porfolio-aida-backend",
+  "version": "1.0.0",
+  "description": "API backend pour le portfolio de Aida Diallo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Aida Diallo",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "fs-extra": "^11.3.4"
+  }
+}
