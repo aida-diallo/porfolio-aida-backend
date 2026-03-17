@@ -1,13 +1,57 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const { sequelize, Profile, Project, Experience, SkillCategory, Skill } = require('./models');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const JWT_SECRET = process.env.JWT_SECRET || 'portfolio-secret-key-change-me';
 
 app.use(cors());
 app.use(express.json());
+
+// ==================== AUTH MIDDLEWARE ====================
+const auth = (req, res, next) => {
+  const header = req.headers.authorization;
+  if (!header || !header.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Accès non autorisé' });
+  }
+  try {
+    const token = header.split(' ')[1];
+    jwt.verify(token, JWT_SECRET);
+    next();
+  } catch {
+    return res.status(401).json({ error: 'Token invalide ou expiré' });
+  }
+};
+
+// ==================== LOGIN ====================
+app.post('/api/auth/login', async (req, res) => {
+  const { password } = req.body;
+  const adminHash = process.env.ADMIN_PASSWORD_HASH;
+
+  if (!adminHash) {
+    return res.status(500).json({ error: 'Mot de passe admin non configuré' });
+  }
+
+  const valid = await bcrypt.compare(password, adminHash);
+  if (!valid) {
+    return res.status(401).json({ error: 'Mot de passe incorrect' });
+  }
+
+  const token = jwt.sign({ role: 'admin' }, JWT_SECRET, { expiresIn: '24h' });
+  res.json({ token });
+});
+
+// Route utilitaire pour générer un hash (à utiliser une seule fois)
+app.post('/api/auth/hash', (req, res) => {
+  const { password } = req.body;
+  if (!password) return res.status(400).json({ error: 'Mot de passe requis' });
+  const hash = bcrypt.hashSync(password, 10);
+  res.json({ hash });
+});
 
 // ==================== HEALTH CHECK ====================
 app.get('/', (req, res) => {
@@ -15,7 +59,6 @@ app.get('/', (req, res) => {
 });
 
 // ==================== PROFILE ====================
-// Helper : convertir le profil DB → format frontend
 const formatProfile = (p) => ({
   name: p.name,
   title: p.title,
@@ -47,13 +90,12 @@ app.get('/api/profile', async (req, res) => {
   }
 });
 
-app.put('/api/profile', async (req, res) => {
+app.put('/api/profile', auth, async (req, res) => {
   try {
     let profile = await Profile.findOne();
     if (!profile) profile = await Profile.create({});
     const body = req.body;
     const updateData = { ...body };
-    // Convertir le format frontend → DB
     if (body.about) {
       updateData.about1 = body.about[0] || '';
       updateData.about2 = body.about[1] || '';
@@ -84,7 +126,7 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
-app.post('/api/projects', async (req, res) => {
+app.post('/api/projects', auth, async (req, res) => {
   try {
     const project = await Project.create(req.body);
     res.status(201).json(project);
@@ -93,7 +135,7 @@ app.post('/api/projects', async (req, res) => {
   }
 });
 
-app.put('/api/projects/:id', async (req, res) => {
+app.put('/api/projects/:id', auth, async (req, res) => {
   try {
     const project = await Project.findByPk(req.params.id);
     if (!project) return res.status(404).json({ error: 'Projet non trouvé' });
@@ -104,7 +146,7 @@ app.put('/api/projects/:id', async (req, res) => {
   }
 });
 
-app.delete('/api/projects/:id', async (req, res) => {
+app.delete('/api/projects/:id', auth, async (req, res) => {
   try {
     const project = await Project.findByPk(req.params.id);
     if (!project) return res.status(404).json({ error: 'Projet non trouvé' });
@@ -125,7 +167,7 @@ app.get('/api/experiences', async (req, res) => {
   }
 });
 
-app.post('/api/experiences', async (req, res) => {
+app.post('/api/experiences', auth, async (req, res) => {
   try {
     const exp = await Experience.create(req.body);
     res.status(201).json(exp);
@@ -134,7 +176,7 @@ app.post('/api/experiences', async (req, res) => {
   }
 });
 
-app.put('/api/experiences/:id', async (req, res) => {
+app.put('/api/experiences/:id', auth, async (req, res) => {
   try {
     const exp = await Experience.findByPk(req.params.id);
     if (!exp) return res.status(404).json({ error: 'Expérience non trouvée' });
@@ -145,7 +187,7 @@ app.put('/api/experiences/:id', async (req, res) => {
   }
 });
 
-app.delete('/api/experiences/:id', async (req, res) => {
+app.delete('/api/experiences/:id', auth, async (req, res) => {
   try {
     const exp = await Experience.findByPk(req.params.id);
     if (!exp) return res.status(404).json({ error: 'Expérience non trouvée' });
@@ -169,9 +211,8 @@ app.get('/api/skills', async (req, res) => {
   }
 });
 
-app.put('/api/skills', async (req, res) => {
+app.put('/api/skills', auth, async (req, res) => {
   try {
-    // Remplacer toutes les compétences
     await Skill.destroy({ where: {} });
     await SkillCategory.destroy({ where: {} });
     for (const cat of req.body) {
@@ -203,14 +244,14 @@ app.post('/api/contact', (req, res) => {
 const start = async () => {
   try {
     await sequelize.authenticate();
-    console.log('Connexion MySQL OK');
+    console.log('Connexion PostgreSQL OK');
     await sequelize.sync();
     console.log('Tables synchronisées');
     app.listen(PORT, () => {
       console.log(`Serveur portfolio demarre sur le port ${PORT}`);
     });
   } catch (err) {
-    console.error('Erreur de connexion MySQL:', err.message);
+    console.error('Erreur de connexion:', err.message);
     process.exit(1);
   }
 };
