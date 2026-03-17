@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
     role: { type: DataTypes.STRING, allowNull: false },
     company: { type: DataTypes.STRING, defaultValue: '' },
     description: { type: DataTypes.TEXT, defaultValue: '' },
-    tags: { type: DataTypes.TEXT, defaultValue: '[]', get() { try { return JSON.parse(this.getDataValue('tags')); } catch { return []; } }, set(val) { this.setDataValue('tags', JSON.stringify(val)); } },
+    tags: { type: DataTypes.JSONB, defaultValue: [] },
     displayOrder: { type: DataTypes.INTEGER, defaultValue: 0 },
   });
 };

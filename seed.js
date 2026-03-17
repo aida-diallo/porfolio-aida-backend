@@ -38,7 +38,7 @@ const seed = async () => {
       {
         name: 'E-Commerce Platform',
         description: "Plateforme e-commerce complète avec système de paiement intégré, gestion de panier et tableau de bord administrateur.",
-        tech: JSON.stringify(['React', 'Node.js', 'MongoDB', 'Stripe']),
+        tech: (['React', 'Node.js', 'MongoDB', 'Stripe']),
         github: 'https://github.com/aida-diallo',
         live: 'https://example.com',
         featured: true,
@@ -47,7 +47,7 @@ const seed = async () => {
       {
         name: 'Application de Gestion',
         description: "Application de gestion de tâches et de projets avec authentification, collaboration en temps réel et notifications.",
-        tech: JSON.stringify(['React', 'Firebase', 'Material UI', 'WebSocket']),
+        tech: (['React', 'Firebase', 'Material UI', 'WebSocket']),
         github: 'https://github.com/aida-diallo',
         live: 'https://example.com',
         featured: true,
@@ -56,7 +56,7 @@ const seed = async () => {
       {
         name: 'Portfolio Créatif',
         description: "Portfolio personnel avec design moderne, animations fluides et une expérience utilisateur immersive.",
-        tech: JSON.stringify(['React', 'Framer Motion', 'CSS3', 'Express']),
+        tech: (['React', 'Framer Motion', 'CSS3', 'Express']),
         github: 'https://github.com/aida-diallo',
         live: 'https://example.com',
         featured: false,
@@ -65,7 +65,7 @@ const seed = async () => {
       {
         name: 'API RESTful',
         description: "API backend complète avec authentification JWT, gestion des rôles et documentation Swagger intégrée.",
-        tech: JSON.stringify(['Node.js', 'Express', 'PostgreSQL', 'JWT']),
+        tech: (['Node.js', 'Express', 'PostgreSQL', 'JWT']),
         github: 'https://github.com/aida-diallo',
         live: 'https://example.com',
         featured: false,
@@ -81,7 +81,7 @@ const seed = async () => {
         role: 'Développeuse Full Stack',
         company: 'Projet Personnel / Freelance',
         description: "Conception et développement d'applications web complètes. Mise en place d'architectures modernes et de solutions performantes pour divers clients.",
-        tags: JSON.stringify(['React', 'Node.js', 'MongoDB', 'REST API']),
+        tags: (['React', 'Node.js', 'MongoDB', 'REST API']),
         displayOrder: 1,
       },
       {
@@ -89,7 +89,7 @@ const seed = async () => {
         role: 'Développeuse Front-End',
         company: 'Stage / Projet Académique',
         description: "Développement d'interfaces utilisateur réactives et modernes. Collaboration avec les équipes design pour créer des expériences utilisateur optimales.",
-        tags: JSON.stringify(['JavaScript', 'React', 'CSS3', 'Figma']),
+        tags: (['JavaScript', 'React', 'CSS3', 'Figma']),
         displayOrder: 2,
       },
       {
@@ -97,7 +97,7 @@ const seed = async () => {
         role: 'Formation en Développement Web',
         company: 'Parcours Académique',
         description: "Apprentissage approfondi des fondamentaux du développement web, des bases de données et des méthodologies de développement agile.",
-        tags: JSON.stringify(['HTML/CSS', 'JavaScript', 'Python', 'SQL']),
+        tags: (['HTML/CSS', 'JavaScript', 'Python', 'SQL']),
         displayOrder: 3,
       },
     ]);
