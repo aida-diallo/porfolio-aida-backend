@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const { sequelize, Profile, Project, Experience, SkillCategory, Skill } = require('./models');
 
 const app = express();
@@ -231,17 +231,8 @@ app.put('/api/skills', auth, async (req, res) => {
   }
 });
 
-// ==================== CONTACT (envoi par email) ====================
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-  connectionTimeout: 10000,
-});
+// ==================== CONTACT (envoi par email via Resend) ====================
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
@@ -250,9 +241,9 @@ app.post('/api/contact', async (req, res) => {
   }
 
   try {
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.MAIL_USER}>`,
-      to: process.env.MAIL_TO || process.env.MAIL_USER,
+    await resend.emails.send({
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: process.env.MAIL_TO,
       replyTo: email,
       subject: `[Portfolio] ${subject || 'Nouveau message'} - de ${name}`,
       html: `
