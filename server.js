@@ -233,11 +233,14 @@ app.put('/api/skills', auth, async (req, res) => {
 
 // ==================== CONTACT (envoi par email) ====================
 const transporter = nodemailer.createTransport({
-  service: process.env.MAIL_SERVICE || 'gmail',
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
   },
+  connectionTimeout: 10000,
 });
 
 app.post('/api/contact', async (req, res) => {
