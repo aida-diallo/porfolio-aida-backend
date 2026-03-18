@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
 const { sequelize, Profile, Project, Experience, SkillCategory, Skill } = require('./models');
 
 const app = express();
@@ -230,14 +231,42 @@ app.put('/api/skills', auth, async (req, res) => {
   }
 });
 
-// ==================== CONTACT ====================
-app.post('/api/contact', (req, res) => {
+// ==================== CONTACT (envoi par email) ====================
+const transporter = nodemailer.createTransport({
+  service: process.env.MAIL_SERVICE || 'gmail',
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+  },
+});
+
+app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Champs requis manquants' });
   }
-  console.log('Nouveau message de contact:', { name, email, subject, message });
-  res.json({ success: true, message: 'Message reçu avec succès !' });
+
+  try {
+    await transporter.sendMail({
+      from: `"Portfolio Contact" <${process.env.MAIL_USER}>`,
+      to: process.env.MAIL_TO || process.env.MAIL_USER,
+      replyTo: email,
+      subject: `[Portfolio] ${subject || 'Nouveau message'} - de ${name}`,
+      html: `
+        <h2>Nouveau message depuis votre portfolio</h2>
+        <p><strong>Nom :</strong> ${name}</p>
+        <p><strong>Email :</strong> ${email}</p>
+        <p><strong>Sujet :</strong> ${subject || 'Non spécifié'}</p>
+        <hr />
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
+    });
+
+    res.json({ success: true, message: 'Message envoyé avec succès !' });
+  } catch (err) {
+    console.error('Erreur envoi email:', err.message);
+    res.status(500).json({ error: 'Erreur lors de l\'envoi du message' });
+  }
 });
 
 // ==================== START ====================
