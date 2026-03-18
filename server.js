@@ -247,12 +247,50 @@ app.post('/api/contact', async (req, res) => {
       replyTo: email,
       subject: `[Portfolio] ${subject || 'Nouveau message'} - de ${name}`,
       html: `
-        <h2>Nouveau message depuis votre portfolio</h2>
-        <p><strong>Nom :</strong> ${name}</p>
-        <p><strong>Email :</strong> ${email}</p>
-        <p><strong>Sujet :</strong> ${subject || 'Non spécifié'}</p>
-        <hr />
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0f; border-radius: 16px; overflow: hidden; border: 1px solid #1a1a2e;">
+          <!-- Header -->
+          <div style="background: linear-gradient(135deg, #6c63ff 0%, #a855f7 100%); padding: 32px 24px; text-align: center;">
+            <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: 600; letter-spacing: 0.5px;">Nouveau message</h1>
+            <p style="color: rgba(255,255,255,0.85); margin: 8px 0 0; font-size: 14px;">depuis votre portfolio</p>
+          </div>
+
+          <!-- Body -->
+          <div style="padding: 32px 24px;">
+            <!-- Info cards -->
+            <div style="background: #12121a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #1a1a2e;">
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px 0; color: #6c63ff; font-size: 13px; font-weight: 600; width: 80px; vertical-align: top;">Nom</td>
+                  <td style="padding: 8px 0; color: #e0e0e0; font-size: 14px;">${name}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6c63ff; font-size: 13px; font-weight: 600; vertical-align: top;">Email</td>
+                  <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #a855f7; text-decoration: none; font-size: 14px;">${email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6c63ff; font-size: 13px; font-weight: 600; vertical-align: top;">Sujet</td>
+                  <td style="padding: 8px 0; color: #e0e0e0; font-size: 14px;">${subject || 'Non spécifié'}</td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- Message -->
+            <div style="background: #12121a; border-radius: 12px; padding: 20px; border: 1px solid #1a1a2e;">
+              <p style="color: #6c63ff; font-size: 13px; font-weight: 600; margin: 0 0 12px;">Message</p>
+              <p style="color: #e0e0e0; font-size: 14px; line-height: 1.7; margin: 0;">${message.replace(/\n/g, '<br>')}</p>
+            </div>
+
+            <!-- Reply button -->
+            <div style="text-align: center; margin-top: 24px;">
+              <a href="mailto:${email}" style="display: inline-block; background: linear-gradient(135deg, #6c63ff 0%, #a855f7 100%); color: #ffffff; text-decoration: none; padding: 12px 32px; border-radius: 8px; font-size: 14px; font-weight: 600;">Repondre a ${name}</a>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div style="padding: 16px 24px; text-align: center; border-top: 1px solid #1a1a2e;">
+            <p style="color: #555; font-size: 12px; margin: 0;">Portfolio Aida Diallo</p>
+          </div>
+        </div>
       `,
     });
 
