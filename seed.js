@@ -129,6 +129,46 @@ const seed = async () => {
         featured: false,
         displayOrder: 9,
       },
+      {
+        name: "OPA'S IMMO",
+        description:
+          "Site web complet de l'agence immobilière OPA'S IMMO (Nianing, Mbour). Plateforme full-stack : recherche et présentation de biens, articles, services et messagerie, avec un espace d'administration dédié. Frontend Next.js et API Express / Prisma sur Supabase (PostgreSQL).",
+        tech: ['Next.js', 'Express', 'Prisma', 'Supabase', 'PostgreSQL'],
+        github: '',
+        live: '',
+        featured: true,
+        displayOrder: 10,
+      },
+      {
+        name: 'Global Business Immo',
+        description:
+          "Plateforme immobilière full-stack : catalogue de biens (vente / location), fiches détaillées avec galeries photos (Cloudinary), tableau de bord d'administration et notifications par email. Frontend React / Vite (Material UI, React Query) et API Node.js / Express / Sequelize (MySQL). Déployée en auto-hébergement sur VPS Hostinger, domaine OVHcloud et Cloudflare.",
+        tech: ['React', 'Vite', 'Material UI', 'Node.js', 'Express', 'Sequelize', 'MySQL', 'Cloudinary'],
+        github: '',
+        live: '',
+        featured: true,
+        displayOrder: 11,
+      },
+      {
+        name: 'Jolof Admin',
+        description:
+          "Espace d'administration de la plateforme VTC Jolof (Dakar) : supervision en temps réel (KPI, carte interactive, surge, chauffeurs, alertes SOS), gestion des notifications et authentification sécurisée. Développé en Next.js (App Router), TypeScript et Tailwind CSS.",
+        tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Google Maps'],
+        github: '',
+        live: '',
+        featured: false,
+        displayOrder: 12,
+      },
+      {
+        name: 'Jolof Partner',
+        description:
+          "Back-office partenaire de la flotte VTC Jolof (Dakar & régions) : gestion des chauffeurs, des véhicules, du wallet, de la tarification et des accès collaborateurs. Développé en Next.js, React, TypeScript, Tailwind CSS et Leaflet, conteneurisé avec Docker.",
+        tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Leaflet', 'Docker'],
+        github: '',
+        live: '',
+        featured: false,
+        displayOrder: 13,
+      },
     ]);
     console.log('Projets créés');
 
